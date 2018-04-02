@@ -1,3 +1,4 @@
+//头部
 .top-cate{
 	display:flex;
 	background-image: linear-gradient(90deg,#0af,#0085ff);
@@ -31,6 +32,7 @@
 	}
 }
 
+//菜单页
 .top-cate-all{
 	width:100%;
 	height:100vh;
@@ -39,6 +41,7 @@
 	left:0;
 	z-index:9999;
 	background:rgba(0,0,0,.3);
+	display:none;
 	&.close{
 		display:none;
 	}
@@ -137,6 +140,67 @@
 		}
 	}
 }
+
+//商家列表
+.restaurant-wrapper{
+	height:calc(100vh - 40px - 29px);
+	overflow:hidden;
+	.content{
+		.restaurant{
+			background:#fff;
+			.restaurant-item{
+				display:flex;
+				padding:14px 12px;
+				.thumb{
+					width:75px;
+					height:75px;
+					background:pink;
+				}
+				.info{
+					font-size:12px;
+					color:#999;
+					margin-left:12px;
+					width:calc(100vw - 26px - 80px);
+					h3{
+						color:#333;
+						font-size:14px;
+					}
+					.data{
+						.d-top{
+							display:flex;
+							justify-content: space-between;
+							margin:12px 0;
+						}
+						.d-bottom{
+							margin-bottom:12px;
+							display:flex;
+							justify-content: space-between;
+						}
+					}
+					.activites{
+						display:flex;
+						justify-content: space-between;
+						margin-top:12px;
+						.act-list{
+							li{
+								margin:3px;
+								span{
+									&.icon{
+										color:#fff;
+										text-align:center;
+										margin-right:6px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+//尾部
 .footer{
 	width:100%;
 	display:flex;
