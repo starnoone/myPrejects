@@ -182,13 +182,18 @@
 						justify-content: space-between;
 						margin-top:12px;
 						.act-list{
-							li{
-								margin:3px;
-								span{
-									&.icon{
-										color:#fff;
-										text-align:center;
-										margin-right:6px;
+							display:flex;
+							ul{
+								height:40px;
+								overflow:hidden;
+								li{
+									margin:3px;
+									span{
+										&.icon{
+											color:#fff;
+											text-align:center;
+											margin-right:6px;
+										}
 									}
 								}
 							}

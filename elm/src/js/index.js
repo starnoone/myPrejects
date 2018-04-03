@@ -21,6 +21,13 @@ const secondCateUl = new BScroll('.wrapper-second',{
 	scrollY:true,
 	click:true
 });
+const restaurantBS = new BScroll('.restaurant-wrapper',{
+	scrollY:true,
+	click:true,
+	pullUpLoad:{
+		threshold:50
+	}
+});
 
 const catagory = {
 	data:[],
@@ -30,47 +37,75 @@ const catagory = {
 }
 
 $(function(){
+
+//加载更多
+var offsetVal = 0;
+restaurantBS.on('pullingUp', function() {
+	let id = "";
+	offsetVal += 8;
+	if(catagory.dirFirstCateIndex === 1 && catagory.secondCateIndex === 0){
+		var cArr = catagory.data[1].sub_categories;
+		cArr.forEach(function(v,k){
+			id += '&restaurant_category_ids[]=' + v.id;
+		})
+	}else{
+		id = catagory.data[catagory.firstCateIndex].sub_categories[catagory.secondCateIndex].id;
+	}
+	$.ajax({
+		url:api.resCateApi02,
+		type:'get',
+		dataType:'jsonp',
+		data:{cate_id:id,offset:offsetVal},
+		jsonpCallback:'jsonp',
+		success:function(data){
+			getResterantHtml(data.items,'append');
+
+			restaurantBS.finishPullUp();
+            restaurantBS.refresh();
+		}
+	})
+});
+
+
+
 //ajax请求
+var step1 = new Promise(function(resolve, reject){
 	$.ajax({
 		url:api.categoryApi,
 		type:'get',
-		async:false,
 		dataType:'jsonp',
 		jsonpCallback:'jsonp',
 		success:function(data){
 			catagory.data = data;
 
-
-			//console.log(catagory.data);
-			var allId = "";
-			var idArr = catagory.data[catagory.firstCateIndex].sub_categories;
-			for(let j=0;j<idArr.length;j++){
-				allId += '&restaurant_category_ids[]=' + idArr[j].id;
-			}
-			console.log(allId);
-			$.ajax({
-				url:api.resCateApi,
-				type:'get',
-				async:false,
-				data:{cate_id:allId},
-				dataType:'jsonp',
-				jsonpCallback:'jsonp',
-				before:function(){
-					$('.restaurant-list').html('加载中...');
-				},
-				success:function(data){
-					//获取商家信息
-					getResterantHtml(data.items);
-				}
-
-
 			//自动添加头部列表信息
 			getTopCateHtml(catagory.data);
 			//动态添加菜单列表信息
 			getCategories(catagory.data);
-		}
-	})
 
+			resolve(data);
+		}
+	});
+})
+	
+step1.then(function(d){
+	var allId = "";
+	var idArr = catagory.data[1].sub_categories;
+	for(let j=0;j<idArr.length;j++){
+		allId += '&restaurant_category_ids[]=' + idArr[j].id;
+	}
+	$.ajax({
+		url:api.resCateApi02,
+		type:'get',
+		dataType:'jsonp',
+		data:{cate_id:allId},
+		jsonpCallback:'jsonp',
+		success:function(data){
+			getResterantHtml(data.items);
+		}
+	});
+})
+			
 	
 
 
@@ -79,13 +114,13 @@ $(function(){
 $('.top-cate-wrapper .content').delegate('a', 'click', function() {
 	$(this).addClass('active').siblings('a').removeClass('active');
 	catagory.secondCateIndex = $(this).attr('index');
+	$('.restaurant-list').empty();
 	var id = catagory.data[catagory.firstCateIndex].sub_categories[catagory.secondCateIndex].id;
 	//获取数据
 	$.ajax({
-		url:api.resCateApi,
+		url:api.resCateApi02,
 		type:'get',
 		data:{cate_id:'&restaurant_category_ids[]='+id},
-		async:false,
 		dataType:'jsonp',
 		jsonpCallback:'jsonp',
 		before:function(){
@@ -100,10 +135,9 @@ $('.top-cate-wrapper .content').delegate('a', 'click', function() {
 });
 
 //获取商家信息
-function getResterantHtml(data){
+function getResterantHtml(data,mode = 'replase'){
 	let resHtml = "";
 	for(let i=0;i<data.length;i++){
-		console.log(data[i]);
 		//活动结构构建
 		let activitesHtml = '';
 		var suffixArr = ['png','jpg','jpeg','gif'];
@@ -148,13 +182,19 @@ function getResterantHtml(data){
 							<ul>`+activitesHtml+`</ul>
 						</div>
 						<div class="act-op">
-							`+ data[i].restaurant.activities.length +`个活动
+							<span>`+ data[i].restaurant.activities.length +`个活动</span>
+							<span>+</span>
 						</div>
 					</div>
 				</div>
 		</div>`
 	}
-	$('.restaurant-list').html(resHtml);
+	if(mode === 'replase'){
+		$('.restaurant-list').html(resHtml);
+	}else if(mode === 'append'){
+		$('.restaurant-list').append(resHtml);
+	}
+	
 }
 //自动添加头部列表信息
 function getTopCateHtml(cate){
@@ -177,6 +217,20 @@ function getTopCateHtml(cate){
 	});
 	$(".top-cate-wrapper .content").width(cWidth+"px");
 }
+
+
+//点击获取更多活动详情
+$('.act-op').each(function(){
+	$(this).click(function(){
+		var ulWidth = 0;
+		
+		$(this).siblings('.act-list').first('ul').attr('color','#ff0000');
+		console.log('000');
+	})
+})
+$('restaurant-list').delegate('.act-op','click',function(){
+	console.log('000');
+})
 
 //动态添加菜单列表信息
 function getCategories(categories){
@@ -225,7 +279,7 @@ firstCateUl.delegate('li', 'click', function(event) {
 });
 //二级菜单
 var secondCateUl = $('.content-second .wrapper .content');
-secondCateUl.delegate('li', 'click', function(event) {
+secondCateUl.delegate('li', 'click', function(event){
 	_switch('close');
 	catagory.secondCateIndex = $(this).attr('index');
 	catagory.dirFirstCateIndex = catagory.firstCateIndex;
@@ -233,6 +287,25 @@ secondCateUl.delegate('li', 'click', function(event) {
 	getTopCateHtml(catagory.data);
 	//动态添加菜单列表信息
 	getCategories(catagory.data);
+
+	//获取商家信息
+	catagory.secondCateIndex = $(this).attr('index');
+	var id = catagory.data[catagory.firstCateIndex].sub_categories[catagory.secondCateIndex].id;
+	$.ajax({
+		url:api.resCateApi02,
+		type:'get',
+		data:{cate_id:'&restaurant_category_ids[]='+id},
+		dataType:'jsonp',
+		jsonpCallback:'jsonp',
+		before:function(){
+			$('.restaurant-list').html('加载中...');
+		},
+		success:function(data){
+			//获取商家信息
+			getResterantHtml(data.items);
+		}
+
+	})
 });
 
 
