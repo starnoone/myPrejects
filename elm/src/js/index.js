@@ -49,7 +49,7 @@ restaurantBS.on('pullingUp', function() {
 			id += '&restaurant_category_ids[]=' + v.id;
 		})
 	}else{
-		id = catagory.data[catagory.firstCateIndex].sub_categories[catagory.secondCateIndex].id;
+		id = '&restaurant_category_ids[]=' + catagory.data[catagory.firstCateIndex].sub_categories[catagory.secondCateIndex].id;
 	}
 	$.ajax({
 		url:api.resCateApi02,
@@ -124,7 +124,7 @@ $('.top-cate-wrapper .content').delegate('a', 'click', function() {
 		dataType:'jsonp',
 		jsonpCallback:'jsonp',
 		before:function(){
-			$('.restaurant-list').html('加载中...');
+			//$('.restaurant-list').html('加载中...');
 		},
 		success:function(data){
 			//获取商家信息

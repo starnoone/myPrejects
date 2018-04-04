@@ -26,8 +26,8 @@
 	.top-cate-op{
 		width:45px;
 		height:40px;
-		background:url('../images/arrow.jpg') no-repeat;
-		background-size:13px 13px;
+		background:url('../images/arrow.png') no-repeat;
+		background-size:15px 15px;
 		background-position:center center;
 	}
 }
@@ -64,6 +64,9 @@
 			span{
 				width:45px;
 				height:40px;
+				background:url('../images/close.png') no-repeat;
+				background-position:center center;
+				background-size:22px 22px;
 			}
 		}
 		.categories-content{
@@ -84,7 +87,7 @@
 					span{
 						font-size:12px;
 						color:#999;
-						width:20px;
+						width:28px;
 						height:12px;
 						border:1px solid #9999991a;
 						border-radius:10px;
@@ -148,6 +151,26 @@
 	.content{
 		.restaurant{
 			background:#fff;
+			.loading{
+				text-align:center;
+				font-size:14px;
+				color:#333;
+				.loading-icon{
+					width:16px;
+					height:16px;
+
+					animation:circleAni 2s linear;
+					animation-play-state: paused;
+					@keyframes circleAni{
+						form{
+							transform:rotateZ(0deg);
+						}
+						to{
+							transform:rotateZ(360deg);
+						}
+					}
+				}
+			}
 			.restaurant-item{
 				display:flex;
 				padding:14px 12px;
@@ -182,7 +205,6 @@
 						justify-content: space-between;
 						margin-top:12px;
 						.act-list{
-							display:flex;
 							ul{
 								height:40px;
 								overflow:hidden;
