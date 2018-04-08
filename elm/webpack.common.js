@@ -6,21 +6,30 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
 	entry:{
 		index:'./src/js/index.js',
+		resDetail:'./src/js/resDetail.js'
 	},
 	plugins:[
 		new CleanWebpackPlugin(['dist']),
-		new ExtractTextPlugin("./static/css/styles.css"),
+		new ExtractTextPlugin("./static/css/[name].css"),
 		new HtmlWebpackPlugin({
 			title:'output',
 			filename:'index.html',
 			template:'src/index.html',
 			inject:'body',
-			chunk:['index']
+			chunks:['index']
+		}),
+		new HtmlWebpackPlugin({
+			title:'output',
+			filename:'resDetail.html',
+			template:'src/resDetail.html',
+			inject:'body',
+			chunks:['resDetail']
 		})
 	],
 	output: {
-		filename:'./static/js/[name].bundle.js',
-		path:path.resolve(__dirname,'dist')
+		path:path.resolve(__dirname,'dist'),
+		filename:'./static/js/[name].bundle.js'
+		
 	},
 	module:{
 		rules:[
