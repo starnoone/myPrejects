@@ -109,5 +109,212 @@ $headerBg:pink;
 		&.on{
 			display:block;
 		}
+		.order{
+			display:flex;
+			.order-nav{
+				width:77px;
+				background-color: #f8f8f8;
+				.content{
+					li{
+						height:14px;
+						line-height:14px;
+						width:64px;
+						padding:18px 6px;
+						text-align:left;
+						color:#333;
+						font-size:12px;
+						border-bottom: 1px solid #e8e8e8;
+						img{
+							width:13px;
+							height:13px;
+							margin-right:3px;
+							vertical-align:middle;
+						}
+						&.on{
+							color:#333;
+							background:#fff;
+						}
+					}
+				}
+			}
+			.order-content{
+				flex:1;
+				.content{
+					.content-assort{
+						h2{
+							margin-left:8px;
+							color:#666;
+							font-size:14px;
+							font-weight:700;
+							border-bottom: 1px solid #eee;
+							height:30px;
+							line-height:30px;
+							span{
+								color:#999;
+								font-size:12px;
+								margin-left:5px;
+								font-weight:normal;
+							}
+						}
+						.content-assort-item{
+							padding:8px;
+							height:100px;
+							display:flex;
+							font-size:12px;
+							.logo{
+								width:70px;
+								height:70px;
+								img{
+									width:100%;
+									height:100%;
+								}
+							}
+							.detail{
+								flex:1;
+								margin-left:12px;
+								h3{
+									color:#333;
+								}
+								p{
+									&.det{
+										color:#999;
+										width:180px;
+										overflow:hidden;
+										white-space:nowrap;
+										text-overflow:ellipsis;
+										margin:3px 0;
+									}
+									&.sale{
+										color:#666;
+										span{
+											margin-right:5px;
+										}
+									}
+								}
+								.cont{
+									height:20px;
+									.price{
+										color: #f60;
+										font-size:16px;
+										font-weight:700px;									}
+								}
+							}
+						}
+					}
+				}
+			}
+			.order-footer{
+				background-color: rgba(61,61,63,.9);
+				height:48px;
+				width:100%;
+				display:flex;
+				position:fixed;
+				bottom:0;
+				right:0;
+				color:#fff;
+				&-left{
+					position:relative;
+					i{
+						width:40px;
+						height:40px;
+						border: 5px solid #444;
+						border-radius:100%;
+						display:inline-block;
+						background-color:#333;
+					    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgNTggNTgiPjxkZWZzPjxmaWx0ZXIgaWQ9ImEiIHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiIHg9Ii01MCUiIHk9Ii01MCUiIGZpbHRlclVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCI+PGZlT2Zmc2V0IGluPSJTb3VyY2VBbHBoYSIgcmVzdWx0PSJzaGFkb3dPZmZzZXRPdXRlcjEiLz48ZmVHYXVzc2lhbkJsdXIgaW49InNoYWRvd09mZnNldE91dGVyMSIgcmVzdWx0PSJzaGFkb3dCbHVyT3V0ZXIxIiBzdGREZXZpYXRpb249IjEuNSIvPjxmZUNvbG9yTWF0cml4IGluPSJzaGFkb3dCbHVyT3V0ZXIxIiByZXN1bHQ9InNoYWRvd01hdHJpeE91dGVyMSIgdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwLjA4IDAiLz48ZmVNZXJnZT48ZmVNZXJnZU5vZGUgaW49InNoYWRvd01hdHJpeE91dGVyMSIvPjxmZU1lcmdlTm9kZSBpbj0iU291cmNlR3JhcGhpYyIvPjwvZmVNZXJnZT48L2ZpbHRlcj48cGF0aCBpZD0iYiIgZD0iTTcuNjE0IDQuMDUxYy0xLjA2Ni4wODYtMS40NTItLjM5OC0xLjc1Mi0xLjU4NEM1LjU2MiAxLjI4LjMzIDUuODguMzMgNS44OGwzLjcxIDE5LjQ3NmMwIC4xNDgtMS41NiA3LjUxNS0xLjU2IDcuNTE1LS40ODkgMi4xOS4yOTIgNC4yNyAzLjU2IDQuMzIgMCAwIDM2LjkxNy4wMTcgMzYuOTIuMDQ3IDEuOTc5LS4wMTIgMi45ODEtLjk5NSAzLjAxMy0zLjAzOS4wMy0yLjA0My0xLjA0NS0yLjk3OC0yLjk4Ny0yLjk5M0w4LjgzIDMxLjE5MnMuODYtMy44NjUgMS4wNzctMy44NjVjMCAwLTUuNzg4LjEyMiAzMi4wNjUtMS45NTYuNjA2LS4wMzMgMi4wMTgtLjc2NCAyLjI5OC0xLjg0OCAxLjExMy00LjMxNyA0LjAwOC0xMy4yNiA0LjQ1OC0xNS42NC45MzItNC45MjUgMi4wNjEtOC41NTgtNC4yOC03LjQwNSAwIDAtMzUuNzY4IDMuNDg3LTM2LjgzMyAzLjU3M3oiLz48L2RlZnM+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWx0ZXI9InVybCgjYSkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMgMikiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDUuMDM4IDcuODA4KSI+PG1hc2sgaWQ9ImMiIGZpbGw9IiNmZmYiPjx1c2UgeGxpbms6aHJlZj0iI2IiLz48L21hc2s+PHVzZSBmaWxsPSIjNUY1RjYzIiB4bGluazpocmVmPSIjYiIvPjxwYXRoIGZpbGw9IiNFQkVFRjMiIGQ9Ik01My45NjIgNy43NzRsLTUuNzAxIDE5LjMwNS00MC43OCAxLjU3NHoiIG1hc2s9InVybCgjYykiIG9wYWNpdHk9Ii4wNSIvPjwvZz48cGF0aCBzdHJva2U9IiM1RjVGNjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSI2IiBkPSJNOS4zNzQgMTguNzIyUzcuODY4IDExLjI4MyA3LjMyMyA4LjcxQzYuNzc4IDYuMTM2IDUuODYgNS4zMyAzLjk3OCA0LjUyIDIuMDk2IDMuNzEzLjM2NyAyLjI4Ni4zNjcgMi4yODYiLz48Y2lyY2xlIGN4PSI0NiIgY3k9IjUxIiByPSI0IiBmaWxsPSIjNUY1RjYzIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSI1MSIgcj0iNCIgZmlsbD0iIzVGNUY2MyIvPjwvZz48L3N2Zz4=);
+					    background-size:22px 22px;
+					    background-repeat:no-repeat;
+					    background-position:center center;
+					    position:absolute;
+					    bottom:10px;
+					    left:14px;
+					}
+					&-pri{
+						margin-left:72px;
+						font-size:0;
+						span{
+							font-size:18px;
+							display:block;
+							margin:3px 0;
+						}
+						em{
+							font-size:12px;
+							font-style:normal;
+							color:#999;
+						}
+					}
+				}
+				&-right{
+					font-size:18px;
+					height:48px;
+					line-height:48px;
+					padding-right:12px;
+					flex:1;
+					text-align:right;
+				}
+			}
+		}
+		.evaluate{
+			background-color: #f5f5f5;
+			
+			.score{
+				height:66px;
+				padding:15px;
+				background:#fff;
+				display:flex;
+				&-left{
+					width:108px;
+					border-right:1px solid #ddd;
+					text-align:center;
+					font-size:12px;
+					span{
+						display:block;
+						color: #ff6000;
+    					font-weight: 700;
+    					font-size:20px;	
+					}
+					em{
+						font-style:normal;
+						display:block;
+						color:#666;
+						margin:4px 0;
+					}
+					p{
+						color:#999;
+						font-size:8px;
+					}
+				}
+				&-right{
+					flex:1;
+				}
+			}
+			.comment{
+				padding:10px 12px;
+				margin-top:12px;
+				background:#fff;
+				.select{
+					border-bottom: 1px solid #ddd;
+					height:40px;
+					margin-bottom:10px;
+					span{
+						height:28px;
+						line-height:28px;
+						display:inline-block;
+						margin:0 2px;
+						padding:0 9px;
+						border-radius: 5px;
+					    color: #6d7885;
+					    background-color: #ebf5ff;
+					    font-size:12px;
+					}
+				}
+				.content{
+					li{
+						height:126px;
+						border-bottom: 1px solid #ddd;
+					}
+				}
+			}
+		}	
 	}
 }
